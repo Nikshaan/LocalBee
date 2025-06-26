@@ -43,7 +43,7 @@ async def add_place_information(newPlace: getPlaceInfo, req: checkUser, db: Sess
     
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail = "No access!!"
+        detail = "Wrong password!"
         )
 
 @info_router.get('/places')
@@ -52,6 +52,17 @@ async def all_places_information(db: Session = Depends(get_db)):
     places = db.query(Place).all()
 
     return jsonable_encoder(places)
+
+@info_router.get('/places/coordinates')
+async def all_places_information(db: Session = Depends(get_db)):
+
+    places = db.query(Place).all()
+
+    placesCoordinates = list(map(lambda place: place.coord, places))
+    placesNames = list(map(lambda place: place.name, places))
+    placesInfo = [placesCoordinates, placesNames]
+    
+    return jsonable_encoder(placesInfo)
 
 @info_router.get('/places/{tag}')
 async def places_by_tag(tag: str, db: Session = Depends(get_db)):
@@ -83,7 +94,7 @@ async def delete_place_information(id: str, req: checkUser, db: Session = Depend
     
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail = "No access!!"
+        detail = "Wrong password!"
         )
 
 @info_router.patch('/place/update/{id}')
@@ -107,5 +118,5 @@ async def delete_place_information(id: str, req: checkUser, placeUpdate: updateP
     
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail = "No access!!"
+        detail = "Wrong password!"
         )

@@ -4,8 +4,8 @@ import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 
 interface marker {
-    position: number[],
-    id: number
+    coor: number[][],
+    names: string[]
 }
 
 interface MyMap {
@@ -13,24 +13,30 @@ interface MyMap {
     zoom: number
 }
 
+interface coor {
+  coor: number[][]
+}
+
+interface names {
+  names: string[]
+}
+
 export default function MyMap(props: MyMap) {
   const { position, zoom } = props
+  const coordinates: coor = position[0];
+  const names: names = position[1];
 
-  const handleMarker = (po: number[]) => {
-    console.log(po)
-  }
-
-  return <MapContainer zoom={zoom} center={[51.505, -0.09]}  className="h-[80svh] w-full">
+  return <MapContainer zoom={zoom} center={[51.505, -0.09]}  className="h-[100svh] w-full z-40">
     <TileLayer
-    className="w-full h-[80svh]"
+    className="w-full h-[100svh]"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    {position.map(marker => (
-        <Marker key={marker.id} position={marker.position}>
+    {coordinates.map((coordinate: number[], index: number) => (
+        <Marker key={index} position={coordinate}>
           <Popup>
-            <div className="cursor-pointer" onClick={() => handleMarker(marker.position)}>  
-                {marker.id}
+            <div className="cursor-pointer">  
+                {names[index]}
             </div>
         </Popup>
         </Marker>
