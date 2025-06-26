@@ -2,6 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
+import Link from "next/link"
 
 interface marker {
     coor: number[][],
@@ -26,7 +27,7 @@ export default function MyMap(props: MyMap) {
   const coordinates: coor = position[0];
   const names: names = position[1];
 
-  return <MapContainer zoom={zoom} center={[51.505, -0.09]}  className="h-[100svh] w-full z-40">
+  return <MapContainer zoom={zoom} center={[28.65195,77.23149]}  className="h-[100svh] w-full z-40">
     <TileLayer
     className="w-full h-[100svh]"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -35,8 +36,10 @@ export default function MyMap(props: MyMap) {
     {coordinates.map((coordinate: number[], index: number) => (
         <Marker key={index} position={coordinate}>
           <Popup>
-            <div className="cursor-pointer">  
-                {names[index]}
+            <div className="cursor-pointer">
+              <Link href={`/viewPlace/${coordinate[0]}/${coordinate[1]}`}>  
+                { names[index] }
+              </Link>  
             </div>
         </Popup>
         </Marker>

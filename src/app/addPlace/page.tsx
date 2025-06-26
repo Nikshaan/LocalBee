@@ -39,7 +39,7 @@ const Page = () => {
       const coordiantes = getCoordinates();
       const ratingNum = parseInt(rating.trim());
       const imageArr = images.split(",").map(link => link.trim()).filter(link => link !== '');
-      if(imageArr.length > 5){
+      if(imageArr.length > 6){
         throw new Error("Cannot attach more than 5 images!")
       }
       const tagArr = tags.split(",").map(tag => tag.trim()).filter(tag => tag !== '');
