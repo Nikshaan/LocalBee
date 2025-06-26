@@ -24,3 +24,26 @@ class getPlaceInfo(BaseModel):
                 "tags": ["food", "transport", "weather"]
             }
         }
+
+class updatePlaceInfo(BaseModel):
+    
+    id: Optional[str] = None
+    coord: Optional[List[float]] = None
+    name: Optional[str] = None
+    photos: Optional[List[str]] = None
+    info: Optional[str] = None  
+    rating: Optional[int] = None
+    tags: Optional[List[str]] = None 
+
+    class Config:
+        from_attributes = True 
+        json_schema_extra = {
+            "example": {
+                "name": "Bombay",
+                "rating": 9,
+                "tags": ["city", "landmarks"]
+            }
+        }
+
+class checkUser(BaseModel):
+    password: str
