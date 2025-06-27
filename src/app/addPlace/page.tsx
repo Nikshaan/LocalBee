@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 import { ToastContainer, toast, Bounce} from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const [coor, setCoor] = useState<string>("");
@@ -13,6 +14,7 @@ const Page = () => {
   const [images, setImages] = useState<string>("");
   const [tags, setTags] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const getCoordinates = () => {
     try {
@@ -28,7 +30,12 @@ const Page = () => {
 
     } catch (error) {
       console.error("Geocoding error:", error);
-      toast.error(error.message);
+      if (error instanceof Error) {
+        toast.error(error.response.data.detail);
+      } else {
+        toast.error("An unexpected error occurred.");
+        console.error("Unknown error type:", error);
+      }
     }
   };
 
@@ -38,7 +45,7 @@ const Page = () => {
       const infoStr = info.trim();
       const coordiantes = getCoordinates();
       const ratingNum = parseInt(rating.trim());
-      const imageArr = images.split(",").map(link => link.trim()).filter(link => link !== '');
+      const imageArr = images.split(",").map(link => link.trim()).filter(link => link !== '').map(link => new URL(link));
       if(imageArr.length > 6){
         throw new Error("Cannot attach more than 5 images!")
       }
@@ -64,10 +71,16 @@ const Page = () => {
         {withCredentials: true});
 
         toast.success(`${nameStr} has been added to the map!`)
+        router.push('/');
 
     } catch (error) {
       console.error("Error:", error);
-      toast.error(error.response.data.detail);
+      if (error instanceof Error) {
+        toast.error(error.response.data.detail);
+      } else {
+        toast.error("An unexpected error occurred.");
+        console.error("Unknown error type:", error);
+      }
     }
   }
 
@@ -148,7 +161,7 @@ const Page = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="bg-white text-black px-2 rounded-lg border w-full"
-            type="text"
+            type="password"
           />
         </div>
         <button onClick={addPlacetoDB} type="submit" className="bg-white p-0.2 px-2 ml-1 cursor-pointer">

@@ -1,6 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 import Image from 'next/image';
+import EditPlace from '@/app/components/editPlace';
+
+interface info {
+  coord: number[],
+  id: string,
+  name: string,
+  info: string,
+  photos: string[],
+  rating: number,
+  tags: string[]
+}
 
 interface coords {
   params: {
@@ -21,10 +32,10 @@ const Page: React.FC<coords> = async ({ params }) => {
     return res.data;
   };
 
-  const info = await getPlaceInfo();
+  const info: info[] = await getPlaceInfo();
   
   return (
-    <div className='pt-20 w-[80%] m-auto flex flex-col justify-center items-center gap-5'>
+    <div className='pt-20 pb-20 w-[80%] m-auto flex flex-col justify-center items-center gap-5'>
       <p>name: {info[0].name}</p>
       <p>coordinates: {info[0].coord[0]}, {info[0].coord[1]}</p>
       <p>information: {info[0].info}</p>
@@ -46,6 +57,9 @@ const Page: React.FC<coords> = async ({ params }) => {
               </div>
           ))
         }
+      </div>
+      <div className='w-full justify-center items-center'>
+        <EditPlace data = {info[0]} />
       </div>
     </div>
   );
