@@ -10,15 +10,14 @@ const Navbar = () => {
           </Link>
         </div>
         <div className='cursor-pointer border-2 p-1'>
-            All places
-        </div>
-        <div className='cursor-pointer border-2 p-1'>
           <Link href="/addPlace">
             Add place
           </Link>
         </div>
         <div className='cursor-pointer border-2 p-1'>
-            Places by Tags
+          <Link href="/placeByTag">
+            Places by Tag
+          </Link>
         </div>
     </div>
   )

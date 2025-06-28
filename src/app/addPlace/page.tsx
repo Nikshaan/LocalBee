@@ -1,18 +1,56 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 import { ToastContainer, toast, Bounce} from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
+const normal_col = 'bg-gray-200';
+const clicked_col = 'bg-green-500';
+
+interface TagStates {
+  [tag: string]: boolean;
+}
+
+interface Action {
+  type: 'TOGGLE_TAG_COLOR';
+  payload: {
+    tag: string;
+  };
+}
+
+const colorReducer = (state: TagStates, action: Action): TagStates => {
+  switch (action.type) {
+    case 'TOGGLE_TAG_COLOR':
+      const { tag } = action.payload; 
+      return {
+        ...state,
+        [tag]: !state[tag],
+      };
+    default:
+      return state;
+  }
+};
+
 const Page = () => {
+  
+  const tagsList = ["Solo", "Family Trip", "Friends Trip", "Work Trip", "Backpacking", "Road Trip", "Cruise", "Day Trip",
+    "Long-Term Stay", "Weekend Trip", "Relaxation", "Adventure", "Cultural Immersion", "Foodie", "Nature", "History", "Art & Museums", "Shopping",
+    "Beach", "Mountains", "City Break", "Wildlife", "Photography", "Volunteering", "Study Abroad", "Pilgrimage", "Music/Festival", "Spa/Wellness",
+    "Skiing/Snowboarding", "Diving/Snorkeling", "Hiking", "Surfing", "Theme Park", "First Time Visit", "Revisited", "Favorite", "Memorable", "Challenging",
+    "Relaxing", "Exciting", "Unexpected", "Must-Do", "Hidden Gem", "Hotel", "Hostel", "Airbnb/Vacation Rental", "Camping", "Glamping", "Resort", "Homestay",
+    "Boutique", "Luxury", "Budget", "Summer", "Winter", "Spring", "Autumn/Fall", "Tropical", "Desert", "Cold", "Warm", "Coastal", "Rural", "Urban",
+    "Island", "Forest", "Lakeside", "Riverside", "Volcanic", "Dream Destination", "Bucket List", "Future Return", "Recommended", "New Cuisine", "Museum",
+    "Historical Site", "National Park", "Market", "Restaurant", "Cafe", "Waterfall", "Castle", "Temple/Church", "Art Gallery", "Zoo/Aquarium",
+    "Bridge", "Viewpoint", "Flight", "Train", "Bus", "Car Rental", "Ferry"];
+
   const [coor, setCoor] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [info, setInfo] = useState<string>("");
   const [rating, setRating] = useState<string>("");
   const [images, setImages] = useState<string>("");
-  const [tags, setTags] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
@@ -31,7 +69,7 @@ const Page = () => {
     } catch (error) {
       console.error("Geocoding error:", error);
       if (error instanceof Error) {
-        toast.error(error.response.data.detail);
+        toast.error("Invalid coordinates!");
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);
@@ -49,7 +87,7 @@ const Page = () => {
       if(imageArr.length > 6){
         throw new Error("Cannot attach more than 5 images!")
       }
-      const tagArr = tags.split(",").map(tag => tag.trim()).filter(tag => tag !== '');
+      const tagArr = tags;
       const id = nanoid();
       const pass = password.trim();
 
@@ -75,14 +113,34 @@ const Page = () => {
 
     } catch (error) {
       console.error("Error:", error);
-      if (error instanceof Error) {
+      if(error  instanceof TypeError){
+          toast.error("Invalid image URL!");
+      } else if (error instanceof Error) {
         toast.error(error.response.data.detail);
       } else {
         toast.error("An unexpected error occurred.");
-        console.error("Unknown error type:", error);
+        console.error("Unknown error type: ", error);
       }
     }
   }
+
+ const initialColorsState: TagStates = tagsList.reduce((acc, tag) => {
+    acc[tag] = false;
+    return acc;
+  }, {} as TagStates);
+
+ const [tagStates, dispatch] = useReducer(colorReducer, initialColorsState);
+
+ useEffect(() => {
+    const currentTags: string[] = [];
+    for (const tag in tagStates) {
+      if (tagStates[tag]) {
+        currentTags.push(tag);
+      }
+    }
+    setTags(currentTags);
+    console.log(currentTags)
+  }, [tagStates]);
 
   return (
     <div className="bg-gray-800 justify-center pb-16 flex items-center text-black h-[100svh]">
@@ -146,14 +204,18 @@ const Page = () => {
             type="text"
           />
         </div>
-        <div className='w-full'>
-          <input
-            placeholder='Tags (comma separated): '
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
-            type="text"
-          />
+        <div className='w-full flex flex-wrap gap-2 bg-amber-50 p-2 justify-center items-center'>
+          tags: 
+          {
+            tagsList.map((tag, index) => {
+              const currentBgClass: string = tagStates[tag] ? clicked_col : normal_col;
+              return(
+              <div onClick={() => dispatch({ type: 'TOGGLE_TAG_COLOR', payload: { tag } })} key={index} className={`border-2 p-1 cursor-pointer ${currentBgClass}`}> 
+                    <p>{tag}</p>
+              </div>
+            )}
+            )
+          }
         </div>
         <div className='w-full'>
           <input
