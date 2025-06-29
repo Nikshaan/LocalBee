@@ -99,21 +99,21 @@ const Page = () => {
 
     if(filteredPlaces.length == 0){
         return (
-             <div>
-                <div className='w-full text-black mt-20 flex flex-wrap gap-2 bg-amber-50 p-2 justify-center items-center'>
-                    tags: 
-                    {
-                        tagsList.map((tag, index) => {
-                        const currentBgClass: string = tagStates[tag] ? clicked_col : normal_col;
-                        return(
-                        <div onClick={() => dispatch({ type: 'TOGGLE_TAG_COLOR', payload: { tag } })} key={index} className={`border-2 p-1 cursor-pointer ${currentBgClass}`}> 
-                                <p>{tag}</p>
-                        </div>
-                        )}
-                        )
-                    }
+            <div className='text-black pt-20 w-[90%] m-auto min-h-[100hsv] bg-[#547792]'>
+                <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+                  <p className='font-extrabold'>Tags: </p> 
+                  {
+                    tagsList.map((tag, index) => {
+                      const currentBgClass: string = tagStates[tag] ? clicked_col : normal_col;
+                      return(
+                      <div onClick={() => dispatch({ type: 'TOGGLE_TAG_COLOR', payload: { tag } })} key={index} className={`border-2 p-1 cursor-pointer ${currentBgClass}`}> 
+                            <p className=''>{tag}</p>
+                      </div>
+                    )}
+                    )
+                  }
                 </div>
-                <div className='bg-red-500'>
+                <div className='text-red-900 font-bold text-center mt-10'>
                     NO PLACES!
                 </div>
             </div>
@@ -121,28 +121,32 @@ const Page = () => {
     }
 
     return (
-    <div>
-        <div className='w-full text-black mt-20 flex flex-wrap gap-2 bg-amber-50 p-2 justify-center items-center'>
-          tags: 
+    <div className='text-black pt-20 w-[90%] m-auto min-h-[100hsv] bg-[#547792]'>
+        <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+          <p className='font-extrabold'>Tags: </p> 
           {
             tagsList.map((tag, index) => {
               const currentBgClass: string = tagStates[tag] ? clicked_col : normal_col;
               return(
               <div onClick={() => dispatch({ type: 'TOGGLE_TAG_COLOR', payload: { tag } })} key={index} className={`border-2 p-1 cursor-pointer ${currentBgClass}`}> 
-                    <p>{tag}</p>
+                    <p className=''>{tag}</p>
               </div>
             )}
             )
           }
-          </div>
-          <div className='bg-green-300 pb-10 text-black flex flex-col justify-center items-center mt-5'>
-          place:
+        </div>
+          <div className='p-5 w-[70%] m-auto gap-4 pb-10 text-black flex flex-col justify-center items-center mt-5'>
+          <p className='font-extrabold'>Places:</p>
           {
             filteredPlaces.map((place: info, index) => (
-                <Link className='w-[70%] m-auto' key={index} href={`/viewPlace/${place.coord[0]}/${place.coord[1]}`}> 
-                    <div className='flex p-5 justify-between items-center border-2 w-full mt-2' key={index}>
-                        { place.photos[0] && <Image alt='photo' src={place.photos[0]} width={100} height={100} /> }
-                        <p>{place.name}</p>
+                <Link className='w-full m-auto' key={index} href={`/viewPlace/${place.coord[0]}/${place.coord[1]}`}> 
+                    <div className='flex bg-[#213448] text-white p-1 justify-between items-center border-2 w-full' key={index}>
+                        { place.photos[0] && <Image className='p-1 border-2 border-white' alt='photo' src={place.photos[0]} width={300} height={300} /> }
+                        <div className='flex-1 mx-2 ml-3 text-white h-48 p-2 overflow-auto'>
+                          <p className='font-bold'>{place.name}</p>
+                          <p>{place.info}</p>
+                          <p>Rating: {place.rating}</p>
+                        </div>
                     </div>
                 </Link>
             ))

@@ -135,7 +135,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center w-full bg-amber-900'>
+    <div className='flex flex-col justify-center items-center w-full'>
       <div className='flex gap-3 text-white justify-end items-center'>
         <ToastContainer
           position="top-right"
@@ -150,21 +150,21 @@ const EditPlace: React.FC<info> = ( props: info ) => {
           theme="colored"
           transition={Bounce}
         />
-          <p>Enter password:</p>
-          <input value = {password} onChange={handlePassword} type='password' className='bg-white text-black px-1'/>
-          <p onClick={() => setUpdate(!update)} className='cursor-pointer bg-yellow-700 p-1'>update</p>
-          <p onClick={() => deletePlaceInfo()} className='cursor-pointer bg-red-800 p-1'>delete</p>
+          <p className='text-lg font-thin'>Enter password:</p>
+          <input value = {password} onChange={handlePassword} type='password' className='bg-white text-black border-2 border-[#213448] rounded-lg px-1'/>
+          <p onClick={() => setUpdate(!update)} className='hover:underline underline-offset-2 cursor-pointer text-lg'>update</p>
+          <p onClick={() => deletePlaceInfo()} className='hover:underline underline-offset-2 cursor-pointer text-lg'>delete</p>
         </div>
         <div className='w-full'>
           {
             update && <div className='w-full py-10'>
               <div className='flex flex-col gap-5 w-[50%] m-auto justify-center items-center'>
-                <h1 className='text-center text-2xl text-white font-bold'>UPDATE PLACE.</h1>
+                <h1 className='text-center mt-5 text-3xl text-white font-bold'>UPDATE PLACE</h1>
                 <div className='w-full'>
                 <input
                   placeholder='latitude (comma) longitude: '
                   onChange={(e) => setCoor(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   value={coor}
                   type="text"
                 />
@@ -174,7 +174,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   placeholder='Name:'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   type="text"
                 />  
               </div>
@@ -183,7 +183,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   placeholder='Info:'
                   value={info}
                   onChange={(e) => setInfo(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   type="text"
                 />
               </div>
@@ -192,7 +192,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   placeholder='Rating out of 10:'
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   type="text"
                 />
               </div>
@@ -201,7 +201,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   placeholder='Image links (comma separated): '
                   value={images}
                   onChange={(e) => setImages(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   type="text"
                 />
               </div>
@@ -210,11 +210,11 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   placeholder='Tags (comma separated): '
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
-                  className="bg-white text-black px-2 rounded-lg border w-full"
+                  className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
                   type="text"
                 />
               </div>
-              <button onClick={updatePlace} type="submit" className="bg-white text-black p-0.2 px-2 ml-1 cursor-pointer">
+              <button onClick={updatePlace} type="submit" className="bg-[#213448] text-white border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
                 Save changes
               </button>
             </div>

@@ -35,26 +35,24 @@ const Page: React.FC<coords> = async ({ params }) => {
   const info: info[] = await getPlaceInfo();
   
   return (
-    <div className='pt-20 pb-20 w-[80%] m-auto flex flex-col justify-center items-center gap-5'>
-      <p>name: {info[0].name}</p>
-      <p>coordinates: {info[0].coord[0]}, {info[0].coord[1]}</p>
-      <p>information: {info[0].info}</p>
-      <p>rating: {info[0].rating}</p>
-      <p>photos:</p>
-      <div className='flex flex-wrap gap-5'>
-        {
-          info[0].photos.map((photo: string, index: number) => (
-              <Image style={{ width: 'auto', height: 'auto' }} key={index} alt={`Image of ${info[0].name}`} width={400} height={400} src={`${photo}`} />
-          ))
-        }
-      </div>
-      <p>tags:</p>
+    <div className='pt-20 pb-20 w-[80%] mt-10 m-auto flex flex-col justify-start items-center gap-5'>
+      <p className='text-left w-full font-bold text-4xl'>{info[0].name}</p>
+      <p className='text-left w-full'>coordinates: {info[0].coord[0]}, {info[0].coord[1]}</p>
+      <p className='text-left w-full'>{info[0].info}</p>
+      <p className='text-left w-full'>Rating: {info[0].rating} / 10</p>
       <div className='flex gap-2'>
         {
           info[0].tags.map((tag: string, index: number) => (
-              <div key={index} className='border-2 p-1 px-4 bg-amber-200 text-black'>
+              <div key={index} className='border-2 p-1 px-4 bg-[#94B4C1] text-[#213448]'>
                 {tag}
               </div>
+          ))
+        }
+      </div>
+      <div className='flex flex-wrap gap-5 justify-center items-center'>
+        {
+          info[0].photos.map((photo: string, index: number) => (
+              <Image className='border-2 border-white' style={{ width: 'auto', height: 'auto' }} key={index} alt={`Image of ${info[0].name}`} width={400} height={400} src={`${photo}`} />
           ))
         }
       </div>

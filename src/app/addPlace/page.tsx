@@ -6,8 +6,8 @@ import axios from 'axios';
 import { ToastContainer, toast, Bounce} from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
-const normal_col = 'bg-gray-200';
-const clicked_col = 'bg-green-500';
+const normal_col = 'bg-gray-100';
+const clicked_col = 'bg-green-600';
 
 interface TagStates {
   [tag: string]: boolean;
@@ -85,7 +85,7 @@ const Page = () => {
       const ratingNum = parseInt(rating.trim());
       const imageArr = images.split(",").map(link => link.trim()).filter(link => link !== '').map(link => new URL(link));
       if(imageArr.length > 6){
-        throw new Error("Cannot attach more than 5 images!")
+        throw new Error("Cannot attach more than 6 images!")
       }
       const tagArr = tags;
       const id = nanoid();
@@ -143,7 +143,7 @@ const Page = () => {
   }, [tagStates]);
 
   return (
-    <div className="bg-gray-800 justify-center pb-16 flex items-center text-black h-[100svh]">
+    <div className="bg-[#547792] pt-20 justify-center pb-16 flex items-center text-black min-h-[100svh]">
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -158,12 +158,12 @@ const Page = () => {
         transition={Bounce}
       />
       <div className='flex flex-col gap-5 w-[50%] justify-center items-center'>
-        <h1 className='text-center text-2xl text-white font-bold'>ADD A PLACE.</h1>
+        <h1 className='text-center text-4xl mt-5 font-bold text-white'>ADD A PLACE</h1>
         <div className='w-full'>
           <input
             placeholder='latitude (comma) longitude: '
             onChange={(e) => setCoor(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black border-2 px-2 rounded-lg border-[#213448] w-full"
             value={coor}
             type="text"
           />
@@ -173,7 +173,7 @@ const Page = () => {
             placeholder='Name:'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black px-2 border-2 border-[#213448] rounded-lg w-full"
             type="text"
           />  
         </div>
@@ -182,7 +182,7 @@ const Page = () => {
             placeholder='Info:'
             value={info}
             onChange={(e) => setInfo(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
             type="text"
           />
         </div>
@@ -191,27 +191,27 @@ const Page = () => {
             placeholder='Rating out of 10:'
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
             type="text"
           />
         </div>
         <div className='w-full'>
           <input
-            placeholder='Image links (comma separated): '
+            placeholder='Image links (comma separated, max: 6): '
             value={images}
             onChange={(e) => setImages(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
             type="text"
           />
         </div>
-        <div className='w-full flex flex-wrap gap-2 bg-amber-50 p-2 justify-center items-center'>
-          tags: 
+        <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+          <p className='font-extrabold'>Tags: </p> 
           {
             tagsList.map((tag, index) => {
               const currentBgClass: string = tagStates[tag] ? clicked_col : normal_col;
               return(
               <div onClick={() => dispatch({ type: 'TOGGLE_TAG_COLOR', payload: { tag } })} key={index} className={`border-2 p-1 cursor-pointer ${currentBgClass}`}> 
-                    <p>{tag}</p>
+                    <p className=''>{tag}</p>
               </div>
             )}
             )
@@ -222,11 +222,11 @@ const Page = () => {
             placeholder='Enter password:'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
             type="password"
           />
         </div>
-        <button onClick={addPlacetoDB} type="submit" className="bg-white p-0.2 px-2 ml-1 cursor-pointer">
+        <button onClick={addPlacetoDB} type="submit" className="bg-[#213448] text-white border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
           Add place
         </button>
       </div>
