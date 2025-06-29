@@ -1,5 +1,5 @@
 "use client";
-
+import { AxiosError } from 'axios' 
 import React, { useEffect, useReducer, useState } from 'react';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
@@ -115,8 +115,8 @@ const Page = () => {
       console.error("Error:", error);
       if(error  instanceof TypeError){
           toast.error("Invalid image URL!");
-      } else if (error instanceof Error) {
-        toast.error(error.message);
+      } else if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.detail);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type: ", error);

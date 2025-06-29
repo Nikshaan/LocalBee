@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { toast, ToastContainer, Bounce } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
@@ -45,9 +45,8 @@ const EditPlace: React.FC<info> = ( props: info ) => {
 
     } catch (error) {
       console.error("Geocoding error:", error);
-      if (error instanceof Error) {
-        toast.error(error.message);
-        console.log(error)
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.detail);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);
@@ -90,8 +89,8 @@ const EditPlace: React.FC<info> = ( props: info ) => {
 
     } catch (error) {
       console.error("Error:", error);
-      if (error instanceof Error) {
-        toast.error(error.message);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.detail);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);
@@ -122,8 +121,8 @@ const EditPlace: React.FC<info> = ( props: info ) => {
       router.push('/');
       }catch (error) {
       console.error("Error:", error);
-      if (error instanceof Error) {
-        toast.error(error.message);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.detail);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);

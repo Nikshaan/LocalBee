@@ -20,7 +20,7 @@ export default function MyMap(props: MyMap) {
   const { position, zoom } = props
   const coordinates: CoordinatesArray = position[0];
   const names: NamesArray = position[1];
-  const mapCenter: Coordinate = coordinates.length > 0 ? coordinates[0] : [28.65195, 77.23149];
+  const mapCenter: Coordinate = coordinates.length > 0 ? coordinates[coordinates.length-1] : [19.07283, 72.88261000];
   return <MapContainer zoom={zoom} center={mapCenter}  className="h-[100svh] w-full z-40">
     <TileLayer
     className="w-full h-[100svh]"
