@@ -99,8 +99,8 @@ const Page = () => {
 
     if(filteredPlaces.length == 0){
         return (
-            <div className='text-black pt-20 w-[90%] m-auto min-h-[100hsv] bg-[#547792]'>
-                <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+            <div className='text-black pt-20 w-[95%] m-auto min-h-[100hsv] bg-[#213448]'>
+                <div className='w-full rounded-xl p-3 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
                   <p className='font-extrabold'>Tags: </p> 
                   {
                     tagsList.map((tag, index) => {
@@ -113,7 +113,7 @@ const Page = () => {
                     )
                   }
                 </div>
-                <div className='text-red-900 font-bold text-center mt-10'>
+                <div className='text-red-800 font-bold text-center my-10'>
                     NO PLACES!
                 </div>
             </div>
@@ -121,8 +121,8 @@ const Page = () => {
     }
 
     return (
-    <div className='text-black pt-20 w-[90%] m-auto min-h-[100hsv] bg-[#547792]'>
-        <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+    <div className='text-black pt-20 w-[95%] lg:w-[50%] 2xl:w-[40%] m-auto min-h-[100hsv] bg-[#213448]'>
+        <div className='w-full rounded-xl p-3 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
           <p className='font-extrabold'>Tags: </p> 
           {
             tagsList.map((tag, index) => {
@@ -135,17 +135,17 @@ const Page = () => {
             )
           }
         </div>
-          <div className='p-5 w-[70%] m-auto gap-4 pb-10 text-black flex flex-col justify-center items-center mt-5'>
-          <p className='font-extrabold'>Places:</p>
+          <div className='w-[100%] m-auto gap-4 pb-10 text-black flex flex-col justify-center items-center mt-5'>
+          <p className='font-extrabold text-white'>Places:</p>
           {
             filteredPlaces.map((place: info, index) => (
                 <Link className='w-full m-auto' key={index} href={`/viewPlace/${place.coord[0]}/${place.coord[1]}`}> 
-                    <div className='flex bg-[#213448] text-white p-1 justify-between items-center border-2 w-full' key={index}>
-                        { place.photos[0] && <Image className='p-1 border-2 border-white' alt='photo' src={place.photos[0]} width={300} height={300} /> }
-                        <div className='flex-1 mx-2 ml-3 text-white h-48 p-2 overflow-auto'>
+                    <div className='flex w-full bg-[#94B4C1] text-black p-1 justify-between items-center border-2' key={index}>
+                        { place.photos[0] && <Image className='border-2 border-black' alt='photo' src={place.photos[0]} width={200} height={200} /> }
+                        <div className='flex-1 mx-2 ml-3 h-36 p-2 overflow-auto'>
                           <p className='font-bold'>{place.name}</p>
                           <p>{place.info}</p>
-                          <p>Rating: {place.rating}</p>
+                          <p><span className='font-bold'>Rating:</span> {place.rating}</p>
                         </div>
                     </div>
                 </Link>

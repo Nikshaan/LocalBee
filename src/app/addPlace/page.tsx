@@ -139,11 +139,11 @@ const Page = () => {
       }
     }
     setTags(currentTags);
-    console.log(currentTags)
+    
   }, [tagStates]);
 
   return (
-    <div className="bg-[#547792] pt-20 justify-center pb-16 flex items-center text-black min-h-[100svh]">
+    <div className="bg-[#213448] pt-20 justify-center pb-16 flex items-center text-black min-h-[100svh]">
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -157,54 +157,53 @@ const Page = () => {
         theme="colored"
         transition={Bounce}
       />
-      <div className='flex flex-col gap-5 w-[50%] justify-center items-center'>
+      <div className='flex flex-col gap-5 w-[85%] lg:w-[50%] 2xl:w-[40%] justify-center items-center'>
         <h1 className='text-center text-4xl mt-5 font-bold text-white'>ADD A PLACE</h1>
-        <div className='w-full'>
+        <div className='w-full flex justify-center'>
           <input
             placeholder='latitude (comma) longitude: '
             onChange={(e) => setCoor(e.target.value)}
-            className="bg-white text-black border-2 px-2 rounded-lg border-[#213448] w-full"
+            className="bg-white w-full 2xl:w-[70%] text-black border-2 px-2 rounded-lg border-[#213448]"
             value={coor}
             type="text"
           />
         </div>
-        <div className='w-full'>
+        <div className='w-full flex justify-center'>
           <input
             placeholder='Name:'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-white text-black px-2 border-2 border-[#213448] rounded-lg w-full"
+            className="bg-white text-black px-2 border-2 border-[#213448] rounded-lg w-full 2xl:w-[70%]"
             type="text"
           />  
         </div>
-        <div className='w-full'>
-          <input
-            placeholder='Info:'
+        <div className='w-full flex justify-center'>
+          <textarea rows={10}
+            placeholder='Information:'
             value={info}
             onChange={(e) => setInfo(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
-            type="text"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full 2xl:w-[70%]"
           />
         </div>
-        <div className='w-full'>
+        <div className='w-full flex justify-center'>
           <input
             placeholder='Rating out of 10:'
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full 2xl:w-[70%]"
             type="text"
           />
         </div>
-        <div className='w-full'>
-          <input
+        <div className='w-full flex justify-center'>
+          <textarea
+          rows={6}
             placeholder='Image links (comma separated, max: 6): '
             value={images}
             onChange={(e) => setImages(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
-            type="text"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full 2xl:w-[70%]"
           />
         </div>
-        <div className='w-full rounded-xl p-5 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
+        <div className='w-full rounded-xl p-3 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
           <p className='font-extrabold'>Tags: </p> 
           {
             tagsList.map((tag, index) => {
@@ -217,16 +216,16 @@ const Page = () => {
             )
           }
         </div>
-        <div className='w-full'>
+        <div className='w-full flex justify-center'>
           <input
             placeholder='Enter password:'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
+            className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full 2xl:w-[30%]"
             type="password"
           />
         </div>
-        <button onClick={addPlacetoDB} type="submit" className="bg-[#213448] text-white border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
+        <button onClick={addPlacetoDB} type="submit" className="bg-[#94B4C1] border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
           Add place
         </button>
       </div>

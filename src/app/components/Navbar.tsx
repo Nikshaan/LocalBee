@@ -3,19 +3,19 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div className='h-16 border-x-0 flex justify-center gap-4 items-center bg-[#213448] border-2 border-black'>
+    <div className='h-16 flex text-white bg-gradient-to-t from-black lg:text-lg justify-center gap-4 items-center to-[#213448] border-b-2 border-black'>
         <div className='p-1'>
-          <Link className='hover:underline underline-offset-2 cursor-pointer text-lg' href="/">
+          <Link className='hover:underline underline-offset-2 cursor-pointer' href="/">
             Map
           </Link>
         </div>
         <div className='p-1'>
-          <Link className='hover:underline underline-offset-2 cursor-pointer text-lg' href="/addPlace">
+          <Link className='hover:underline underline-offset-2 cursor-pointer' href="/addPlace">
             Add place
           </Link>
         </div>
         <div className='p-1'>
-          <Link className='hover:underline underline-offset-2 cursor-pointer text-lg' href="/placeByTag">
+          <Link className='hover:underline underline-offset-2 cursor-pointer' href="/placeByTag">
             Place by tags
           </Link>
         </div>

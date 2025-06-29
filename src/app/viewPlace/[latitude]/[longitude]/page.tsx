@@ -35,12 +35,12 @@ const Page: React.FC<coords> = async ({ params }) => {
   const info: info[] = await getPlaceInfo();
   
   return (
-    <div className='pt-20 pb-20 w-[80%] mt-10 m-auto flex flex-col justify-start items-center gap-5'>
+    <div className='pt-14 text-white pb-10 w-[85%] lg:w-[50%] 2xl:w-[40%] mt-10 m-auto flex flex-col justify-start items-center gap-5'>
       <p className='text-left w-full font-bold text-4xl'>{info[0].name}</p>
-      <p className='text-left w-full'>coordinates: {info[0].coord[0]}, {info[0].coord[1]}</p>
+      <p className='text-left w-full'><span className='font-bold'>coordinates:</span> {info[0].coord[0]}, {info[0].coord[1]}</p>
       <p className='text-left w-full'>{info[0].info}</p>
-      <p className='text-left w-full'>Rating: {info[0].rating} / 10</p>
-      <div className='flex gap-2'>
+      <p className='text-left w-full'><span className='font-bold'>Rating:</span> {info[0].rating} / 10</p>
+      <div className='flex flex-wrap gap-2'>
         {
           info[0].tags.map((tag: string, index: number) => (
               <div key={index} className='border-2 p-1 px-4 bg-[#94B4C1] text-[#213448]'>

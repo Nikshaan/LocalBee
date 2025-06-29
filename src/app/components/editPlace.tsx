@@ -27,7 +27,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
     const [rating, setRating] = useState<string>("");
     const [images, setImages] = useState<string>("");
     const [tags, setTags] = useState<string>("");
-    console.log(props)
+    
     const  id  = props.data.id;
     const router = useRouter();
     
@@ -136,7 +136,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
 
   return (
     <div className='flex flex-col justify-center items-center w-full'>
-      <div className='flex gap-3 text-white justify-end items-center'>
+      <div className='flex flex-col flex-wrap gap-3 text-white justify-end items-center'>
         <ToastContainer
           position="top-right"
           autoClose={2000}
@@ -149,16 +149,20 @@ const EditPlace: React.FC<info> = ( props: info ) => {
           pauseOnHover
           theme="colored"
           transition={Bounce}
-        />
-          <p className='text-lg font-thin'>Enter password:</p>
-          <input value = {password} onChange={handlePassword} type='password' className='bg-white text-black border-2 border-[#213448] rounded-lg px-1'/>
-          <p onClick={() => setUpdate(!update)} className='hover:underline underline-offset-2 cursor-pointer text-lg'>update</p>
-          <p onClick={() => deletePlaceInfo()} className='hover:underline underline-offset-2 cursor-pointer text-lg'>delete</p>
+        /> 
+        <div className='flex gap-2 justify-center items-center'>
+          <p className='font-thin'>password:</p>
+          <input value = {password} placeholder='Enter password to update / delete : ' onChange={handlePassword} type='password' className='bg-white text-black border-2 border-[#213448] rounded-lg px-1'/>
+        </div> 
+        <div className='flex gap-2 w-full justify-end items-center'>
+          <p onClick={() => setUpdate(!update)} className={`hover:underline ${update?"text-amber-400":"text-white"} underline-offset-2 cursor-pointer`}>update</p>
+          <p onClick={() => deletePlaceInfo()} className='hover:underline underline-offset-2 cursor-pointer'>delete</p>
+        </div>
         </div>
         <div className='w-full'>
           {
             update && <div className='w-full py-10'>
-              <div className='flex flex-col gap-5 w-[50%] m-auto justify-center items-center'>
+              <div className='flex flex-col gap-5 w-[85%] m-auto justify-center items-center'>
                 <h1 className='text-center mt-5 text-3xl text-white font-bold'>UPDATE PLACE</h1>
                 <div className='w-full'>
                 <input
@@ -179,12 +183,12 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                 />  
               </div>
               <div className='w-full'>
-                <input
-                  placeholder='Info:'
+                <textarea
+                  rows={10}
+                  placeholder='Information:'
                   value={info}
                   onChange={(e) => setInfo(e.target.value)}
                   className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
-                  type="text"
                 />
               </div>
               <div className='w-full'>
@@ -197,12 +201,12 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                 />
               </div>
               <div className='w-full'>
-                <input
+                <textarea
+                  rows={6}
                   placeholder='Image links (comma separated): '
                   value={images}
                   onChange={(e) => setImages(e.target.value)}
                   className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
-                  type="text"
                 />
               </div>
               <div className='w-full'>
@@ -214,7 +218,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
                   type="text"
                 />
               </div>
-              <button onClick={updatePlace} type="submit" className="bg-[#213448] text-white border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
+              <button onClick={updatePlace} type="submit" className="bg-[#94B4C1] text-black border border-white p-1 px-2 font-bold hover:scale-105 transition-all rounded-2xl p-0.2 ml-1 cursor-pointer">
                 Save changes
               </button>
             </div>
