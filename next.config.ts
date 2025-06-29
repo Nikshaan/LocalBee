@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'https://local-bee-git-main-nikshaans-projects.vercel.app/',
+        hostname: 'localbee.onrendered.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
