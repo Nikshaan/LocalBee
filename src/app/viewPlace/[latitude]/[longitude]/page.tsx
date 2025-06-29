@@ -33,7 +33,7 @@ interface ViewPlacePageProps {
   };
 }
 
-const Page = async ({ params }: ViewPlacePageProps) => {
+export default async function Page ({ params }: ViewPlacePageProps) {
   const parameters = await params;
   const { latitude, longitude } = parameters;
   
@@ -75,5 +75,3 @@ const Page = async ({ params }: ViewPlacePageProps) => {
     </div>
   );
 };
-
-export default Page

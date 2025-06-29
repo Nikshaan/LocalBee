@@ -1,16 +1,11 @@
+"use client"
+
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import Link from "next/link"
 
-import { Metadata } from 'next';
-
-export const metadata: Metadata= {
-  title: 'Map',
-  description: 'This is the map with pinged places.',
-  keywords: ['map', 'places', 'ping', 'localbee'],
-}
 type Coordinate = [number, number];
 type CoordinatesArray = Coordinate[];
 type NamesArray = string[];

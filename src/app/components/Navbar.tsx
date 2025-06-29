@@ -1,18 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
-import { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 
 const ralewayFont = Raleway({
   subsets: ["latin"],
   weight: "400"
 })
-
-export const metadata: Metadata= {
-  title: 'Navigation bar',
-  description: 'Navigation bar.',
-  keywords: ['navigation bar', 'place', 'navigate', 'add place', 'place by tags', 'map'],
-}
 
 const Navbar = () => {
   return (
