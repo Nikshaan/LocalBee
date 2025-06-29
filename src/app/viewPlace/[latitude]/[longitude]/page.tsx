@@ -2,6 +2,19 @@ import React from 'react'
 import axios from 'axios'
 import Image from 'next/image';
 import EditPlace from '@/app/components/editPlace';
+import { Metadata } from 'next';
+import { Raleway } from 'next/font/google';
+
+const ralewayFont = Raleway({
+  subsets: ["latin"],
+  weight: "400"
+})
+
+export const metadata: Metadata= {
+  title: 'View Place Information',
+  description: 'This is a detailed description and photos of the place.',
+  keywords: ['information', 'place', 'photos', 'rating'],
+}
 
 interface info {
   coord: number[],
@@ -36,9 +49,9 @@ const Page: React.FC<coords> = async ({ params }) => {
   
   return (
     <div className='pt-14 text-white pb-10 w-[85%] lg:w-[50%] 2xl:w-[40%] mt-10 m-auto flex flex-col justify-start items-center gap-5'>
-      <p className='text-left w-full font-bold text-4xl'>{info[0].name}</p>
+      <p className={`text-left w-full font-extrabold text-4xl ${ralewayFont.className}`}>{info[0].name}</p>
       <p className='text-left w-full'><span className='font-bold'>coordinates:</span> {info[0].coord[0]}, {info[0].coord[1]}</p>
-      <p className='text-left w-full'>{info[0].info}</p>
+      <p className={`text-left w-full ${ralewayFont.className}`}>{info[0].info}</p>
       <p className='text-left w-full'><span className='font-bold'>Rating:</span> {info[0].rating} / 10</p>
       <div className='flex flex-wrap gap-2'>
         {

@@ -4,8 +4,8 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-DB_PASS = os.getenv("DB_PASS")
-engine = create_engine(f'postgresql://postgres:{DB_PASS}@localhost:5432/localBee',
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = create_engine(DATABASE_URL,
     echo = True
 )
 Base = declarative_base()

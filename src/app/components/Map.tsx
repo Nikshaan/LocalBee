@@ -4,6 +4,14 @@ import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import Link from "next/link"
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata= {
+  title: 'Map',
+  description: 'This is the map with pinged places.',
+  keywords: ['map', 'places', 'ping', 'localbee'],
+}
+
 interface marker {
     coor: number[][],
     names: string[]

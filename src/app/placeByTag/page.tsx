@@ -3,6 +3,12 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useReducer, useState } from 'react'
+import { Raleway } from 'next/font/google';
+
+const ralewayFont = Raleway({
+  subsets: ["latin"],
+  weight: "400"
+})
 
 const normal_col = 'bg-gray-200';
 const clicked_col = 'bg-green-500';
@@ -99,7 +105,7 @@ const Page = () => {
 
     if(filteredPlaces.length == 0){
         return (
-            <div className='text-black pt-20 w-[95%] m-auto min-h-[100hsv] bg-[#213448]'>
+            <div className='text-black pt-24 w-[95%] m-auto min-h-[100hsv] bg-[#213448]'>
                 <div className='w-full rounded-xl p-3 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
                   <p className='font-extrabold'>Tags: </p> 
                   {
@@ -121,7 +127,7 @@ const Page = () => {
     }
 
     return (
-    <div className='text-black pt-20 w-[95%] lg:w-[50%] 2xl:w-[40%] m-auto min-h-[100hsv] bg-[#213448]'>
+    <div className='text-black pt-24 w-[95%] lg:w-[50%] 2xl:w-[40%] m-auto min-h-[100hsv] bg-[#213448]'>
         <div className='w-full rounded-xl p-3 flex flex-wrap gap-2 bg-[#94B4C1] border-2 border-[#213448] justify-center items-center'>
           <p className='font-extrabold'>Tags: </p> 
           {
@@ -144,7 +150,7 @@ const Page = () => {
                         { place.photos[0] && <Image className='border-2 border-black' alt='photo' src={place.photos[0]} width={200} height={200} /> }
                         <div className='flex-1 mx-2 ml-3 h-36 p-2 overflow-auto'>
                           <p className='font-bold'>{place.name}</p>
-                          <p>{place.info}</p>
+                          <p className={`${ralewayFont.className}`}>{place.info}</p>
                           <p><span className='font-bold'>Rating:</span> {place.rating}</p>
                         </div>
                     </div>
