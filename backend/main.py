@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = ["http://localhost:3000", "https://local-bee-git-main-nikshaans-projects.vercel.app"]
+origins = ["http://localhost:3000", "https://local-bee-git-main-nikshaans-projects.vercel.app/", "https://local-bee.vercel.app/"]
 
 app.add_middleware(
     CORSMiddleware,
