@@ -185,7 +185,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
               <div className='w-full'>
                 <textarea
                   rows={10}
-                  placeholder='Information:'
+                  placeholder='Description:'
                   value={info}
                   onChange={(e) => setInfo(e.target.value)}
                   className="bg-white text-black px-2 rounded-lg border-2 border-[#213448] w-full"
