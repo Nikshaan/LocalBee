@@ -1,9 +1,9 @@
 from fastapi import APIRouter, status, Depends
-from backend.models import Place
-from backend.schemas import getPlaceInfo, updatePlaceInfo, checkUser
+from models import Place
+from schemas import getPlaceInfo, updatePlaceInfo, checkUser
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
-from backend.database import get_db
+from database import get_db
 from fastapi.encoders import jsonable_encoder
 import os
 from dotenv import load_dotenv

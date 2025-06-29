@@ -7,7 +7,7 @@ export default function MyPage() {
   const [markers, setMarkers] = useState(null);
   const getMapPings = async() => {
     const res = await axios.get(
-    "http://127.0.0.1:8000/info/places/coordinates",
+    "https://localbee.onrender.com/info/places/coordinates",
     { withCredentials: true}
     );
     setMarkers(res.data);

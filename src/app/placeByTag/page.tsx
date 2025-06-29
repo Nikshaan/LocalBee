@@ -64,7 +64,7 @@ const Page = () => {
     
     const getMapPings = async() => {
     const res = await axios.get(
-    "http://127.0.0.1:8000/info/places",
+    "https://localbee.onrender.com/info/places",
     { withCredentials: true}
     );
     setPlaces(res.data);

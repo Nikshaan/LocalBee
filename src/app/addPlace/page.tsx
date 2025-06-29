@@ -91,7 +91,7 @@ const Page = () => {
       const id = nanoid();
       const pass = password.trim();
 
-      await axios.post("http://127.0.0.1:8000/info/place/add",
+      await axios.post("https://localbee.onrender.com/info/place/add",
         {
           "newPlace": {
             "coord": coordiantes,

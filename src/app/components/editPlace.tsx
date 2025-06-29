@@ -67,7 +67,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
       const tagArr = tags.split(",").map(tag => tag.trim()).filter(tag => tag !== '');
       const pass = password.trim();
       
-      await axios.patch(`http://127.0.0.1:8000/info/place/update/${id}`,
+      await axios.patch(`https://localbee.onrender.com/info/place/update/${id}`,
         {
           "placeUpdate": {
             "coord": coordiantes,
@@ -109,7 +109,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
 
     const deletePlaceInfo = async () => {
       try{
-      await axios.delete(`http://127.0.0.1:8000/info/place/delete/${id}`,
+      await axios.delete(`https://localbee.onrender.com/info/place/delete/${id}`,
        {
       data: { 
         password: password

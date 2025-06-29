@@ -39,7 +39,7 @@ const Page: React.FC<coords> = async ({ params }) => {
   
   const getPlaceInfo = async () => {
     const res = await axios.get(
-      `http://127.0.0.1:8000/info/place/${latitude}/${longitude}`,
+      `https://localbee.onrender.com/info/place/${latitude}/${longitude}`,
       { withCredentials: true }
     );
     return res.data;
