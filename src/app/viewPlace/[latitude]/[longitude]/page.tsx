@@ -26,9 +26,8 @@ interface info {
   tags: string[]
 }
 
-export default async function Page ({ params }: { params: { latitude: string; longitude: string; } }) {
-  const parameters = await params;
-  const { latitude, longitude } = parameters;
+export default async function Page ({ params }: { params: Promise<{ latitude: string; longitude: string; }> }) {
+  const { latitude, longitude } = await params;
   
   const getPlaceInfo = async () => {
     const res = await axios.get(
