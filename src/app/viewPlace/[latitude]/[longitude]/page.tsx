@@ -26,14 +26,14 @@ interface info {
   tags: string[]
 }
 
-interface coords {
+interface ViewPlacePageProps {
   params: {
     latitude: string;
     longitude: string;
   };
 }
 
-const Page: React.FC<coords> = async ({ params }: coords) => {
+const Page = async ({ params }: ViewPlacePageProps) => {
   const parameters = await params;
   const { latitude, longitude } = parameters;
   
