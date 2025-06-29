@@ -26,14 +26,7 @@ interface info {
   tags: string[]
 }
 
-interface ViewPlacePageProps {
-  params: {
-    latitude: string;
-    longitude: string;
-  };
-}
-
-export default async function Page ({ params }: ViewPlacePageProps) {
+export default async function Page ({ params }: { params: { latitude: string; longitude: string; } }) {
   const parameters = await params;
   const { latitude, longitude } = parameters;
   
