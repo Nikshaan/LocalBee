@@ -33,7 +33,7 @@ interface coords {
   };
 }
 
-const Page: React.FC<coords> = async ({ params }) => {
+const Page: React.FC<coords> = async ({ params }: coords) => {
   const parameters = await params;
   const { latitude, longitude } = parameters;
   

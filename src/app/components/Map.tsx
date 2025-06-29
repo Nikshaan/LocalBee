@@ -11,37 +11,28 @@ export const metadata: Metadata= {
   description: 'This is the map with pinged places.',
   keywords: ['map', 'places', 'ping', 'localbee'],
 }
-
-interface marker {
-    coor: number[][],
-    names: string[]
-}
+type Coordinate = [number, number];
+type CoordinatesArray = Coordinate[];
+type NamesArray = string[];
+type MarkerPosition = [CoordinatesArray, NamesArray];
 
 interface MyMap {
-    position: marker[]
+    position: MarkerPosition
     zoom: number
-}
-
-interface coor {
-  coor: number[][]
-}
-
-interface names {
-  names: string[]
 }
 
 export default function MyMap(props: MyMap) {
   const { position, zoom } = props
-  const coordinates: coor = position[0];
-  const names: names = position[1];
-
-  return <MapContainer zoom={zoom} center={[28.65195,77.23149]}  className="h-[100svh] w-full z-40">
+  const coordinates: CoordinatesArray = position[0];
+  const names: NamesArray = position[1];
+  const mapCenter: Coordinate = coordinates.length > 0 ? coordinates[0] : [28.65195, 77.23149];
+  return <MapContainer zoom={zoom} center={mapCenter}  className="h-[100svh] w-full z-40">
     <TileLayer
     className="w-full h-[100svh]"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    {coordinates.map((coordinate: number[], index: number) => (
+    {coordinates.map((coordinate: Coordinate, index: number) => (
         <Marker key={index} position={coordinate}>
           <Popup>
             <div className="cursor-pointer">

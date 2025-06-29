@@ -71,6 +71,7 @@ const Page = () => {
     setFilteredPlaces(res.data);
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         getMapPings()
     }, [])
@@ -91,7 +92,7 @@ const Page = () => {
             return tags.every(tag => place.tags.includes(tag));
         });
         setFilteredPlaces(newFilteredPlaces);
-  }, [tags])
+  }, [tags, places])
 
     useEffect(() => {
     const currentTags: string[] = [];

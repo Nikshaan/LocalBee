@@ -46,7 +46,8 @@ const EditPlace: React.FC<info> = ( props: info ) => {
     } catch (error) {
       console.error("Geocoding error:", error);
       if (error instanceof Error) {
-        toast.error(error.response.data.detail);
+        toast.error(error.message);
+        console.log(error)
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);
@@ -90,14 +91,14 @@ const EditPlace: React.FC<info> = ( props: info ) => {
     } catch (error) {
       console.error("Error:", error);
       if (error instanceof Error) {
-        toast.error(error.response.data.detail);
+        toast.error(error.message);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);
       }
     }
   }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
       setCoor(props.data.coord.join(", "));
       setName(props.data.name);
@@ -122,7 +123,7 @@ const EditPlace: React.FC<info> = ( props: info ) => {
       }catch (error) {
       console.error("Error:", error);
       if (error instanceof Error) {
-        toast.error(error.response.data.detail);
+        toast.error(error.message);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type:", error);

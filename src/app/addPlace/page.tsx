@@ -116,7 +116,7 @@ const Page = () => {
       if(error  instanceof TypeError){
           toast.error("Invalid image URL!");
       } else if (error instanceof Error) {
-        toast.error(error.response.data.detail);
+        toast.error(error.message);
       } else {
         toast.error("An unexpected error occurred.");
         console.error("Unknown error type: ", error);
