@@ -54,6 +54,22 @@ const Page = () => {
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
+  const  addressToCoordinates = async() => {
+    try{
+    const data = await axios.get(
+    "https://nominatim.openstreetmap.org/search?format=json&q=" + name, {
+      headers: {
+        'User-Agent': 'MyCustomApplication/1.0 (my.email@example.com)',
+      }
+    }
+    );
+    const coords = `${data.data[0].lat}, ${data.data[0].lon}`;
+    setCoor(coords)
+    } catch {
+        toast.error("Cannot find coordinates.");
+    }
+  }
+
   const getCoordinates = () => {
     try {
       const coordinates = coor.split(",").map(coord => coord.trim()).filter(coord => coord !== '');
@@ -175,7 +191,8 @@ const Page = () => {
             onChange={(e) => setName(e.target.value)}
             className="bg-white text-black px-2 border-2 border-[#213448] rounded-lg w-full 2xl:w-[70%]"
             type="text"
-          />  
+          />
+          <button onClick={() => addressToCoordinates()} className='bg-gray-300 ml-2 font-serif text-nowrap border-2 rounded-2xl p-1 cursor-pointer'>Get coordinates</button>
         </div>
         <div className='w-full flex justify-center'>
           <textarea rows={10}

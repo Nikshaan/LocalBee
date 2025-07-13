@@ -89,7 +89,7 @@ const Page = () => {
             return;
         } 
         const newFilteredPlaces = places.filter((place: info) => {
-            return tags.every(tag => place.tags.includes(tag));
+            return tags.some(tag => place.tags.includes(tag));
         });
         setFilteredPlaces(newFilteredPlaces);
   }, [tags, places])
